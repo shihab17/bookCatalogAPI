@@ -5,6 +5,7 @@ export type IBook = {
   author: string;
   genre: string;
   publicationDate: string;
+  reviews: [];
   createdBy?: Types.ObjectId;
   updatedBy?: Types.ObjectId;
 };

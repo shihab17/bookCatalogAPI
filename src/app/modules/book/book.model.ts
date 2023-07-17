@@ -7,8 +7,9 @@ export const BookSchema = new Schema<IBook>(
     author: { type: String, required: true },
     genre: { type: String, required: true },
     publicationDate: { type: String, required: true },
-    createdBy: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    updatedBy: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
+    reviews: { type: [], required: false },
+    createdBy: { type: Schema.Types.ObjectId, required: false, ref: 'User' },
+    updatedBy: { type: Schema.Types.ObjectId, required: false, ref: 'User' },
   },
   { timestamps: true, versionKey: false }
 );

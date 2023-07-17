@@ -7,7 +7,8 @@ exports.BookSchema = new mongoose_1.Schema({
     author: { type: String, required: true },
     genre: { type: String, required: true },
     publicationDate: { type: String, required: true },
-    createdBy: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: 'User' },
-    updatedBy: { type: mongoose_1.Schema.Types.ObjectId, required: true, ref: 'User' },
+    reviews: { type: [], required: false },
+    createdBy: { type: mongoose_1.Schema.Types.ObjectId, required: false, ref: 'User' },
+    updatedBy: { type: mongoose_1.Schema.Types.ObjectId, required: false, ref: 'User' },
 }, { timestamps: true, versionKey: false });
 exports.Book = (0, mongoose_1.model)('Book', exports.BookSchema);
