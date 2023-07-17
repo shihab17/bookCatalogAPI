@@ -21,8 +21,10 @@ const sendResponse_1 = __importDefault(require("../../../shared/sendResponse"));
 const book_constant_1 = require("./book.constant");
 const book_service_1 = require("./book.service");
 const createBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const cow = req.body;
-    const result = yield book_service_1.bookService.createBook(cow);
+    var _a;
+    const book = req.body;
+    book.createdBy = (_a = req.user) === null || _a === void 0 ? void 0 : _a._id;
+    const result = yield book_service_1.bookService.createBook(book);
     (0, sendResponse_1.default)(res, {
         statusCode: http_status_1.default.OK,
         success: true,
@@ -52,7 +54,9 @@ const getSingleBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, 
     });
 }));
 const updateBook = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     const id = req.params.id;
+    req.body.updatedBy = (_b = req.user) === null || _b === void 0 ? void 0 : _b._id;
     const updatedData = req.body;
     const result = yield book_service_1.bookService.updateBook(id, updatedData);
     (0, sendResponse_1.default)(res, {

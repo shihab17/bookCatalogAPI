@@ -18,6 +18,16 @@ const createBookZodSchema = zod_1.z.object({
         }),
     }),
 });
+const updateBookZodSchema = zod_1.z.object({
+    body: zod_1.z.object({
+        title: zod_1.z.string().optional(),
+        author: zod_1.z.string().optional(),
+        genre: zod_1.z.string().optional(),
+        publicationDate: zod_1.z.string().optional(),
+        reviews: zod_1.z.any().optional(),
+    }),
+});
 exports.bookValidation = {
     createBookZodSchema,
+    updateBookZodSchema
 };

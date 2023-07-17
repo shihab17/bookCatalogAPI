@@ -9,8 +9,9 @@ import { IBook } from './book.interface';
 import { bookService } from './book.service';
 
 const createBook = catchAsync(async (req: Request, res: Response) => {
-  const cow = req.body;
-  const result = await bookService.createBook(cow);
+  const book = req.body;
+  book.createdBy = req.user?._id;
+  const result = await bookService.createBook(book);
   sendResponse<IBook>(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -41,6 +42,7 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
 });
 const updateBook = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id;
+  req.body.updatedBy = req.user?._id;
   const updatedData = req.body;
   const result = await bookService.updateBook(id, updatedData);
 
