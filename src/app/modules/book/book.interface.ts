@@ -5,6 +5,7 @@ export type IBook = {
   author: string;
   genre: string;
   publicationDate: string;
+  createdBy?: Types.ObjectId;
   updatedBy?: Types.ObjectId;
 };
 export type BookModel = Model<IBook, Record<string, unknown>>;
