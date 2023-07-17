@@ -2,6 +2,7 @@ import express from 'express';
 import { authController } from './auth.controller';
 import validateRequest from '../../middleware/validateRequest';
 import { authValidation } from './auth.validation';
+import auth from '../../middleware/auth';
 const router = express.Router();
 
 router.post(
@@ -11,7 +12,7 @@ router.post(
 );
 router.post(
   '/signup',
-  validateRequest(authValidation.signupUserZodSchema),
+  validateRequest(authValidation.signupUserZodSchema), auth,
   authController.signUp
 );
 export const AuthRoutes = router;
