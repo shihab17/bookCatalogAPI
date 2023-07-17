@@ -9,3 +9,7 @@ export type IBook = {
   updatedBy?: Types.ObjectId;
 };
 export type BookModel = Model<IBook, Record<string, unknown>>;
+
+export type IBookFilters = {
+    searchTerm?: string;
+  };
