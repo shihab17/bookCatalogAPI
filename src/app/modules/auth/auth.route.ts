@@ -6,4 +6,8 @@ router.post(
   '/login',
   authController.login
 );
+router.post(
+  '/sginup',
+  authController.signUp
+);
 export const AuthRoutes = router;
