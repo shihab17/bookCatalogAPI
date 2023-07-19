@@ -15,7 +15,7 @@ const getAllBook = async (
   filters: IBookFilters,
   paginationOptions: IPaginationOptions
 ): Promise<IGenericResponse<IBook[]>> => {
-  const { searchTerm, ...filtersData } = filters;
+  const { searchTerm, publicationYear, ...filtersData } = filters;
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(paginationOptions);
   const andConditions = [];
@@ -29,6 +29,20 @@ const getAllBook = async (
       })),
     });
   }
+  if (publicationYear) {
+    // Extract the year from publicationYear (assumed format: 'YYYY')
+    const year = publicationYear.trim();
+    if (year.length === 4 && /^\d+$/.test(year)) {
+      // Construct a regular expression to match the publicationDate field in the format 'DD/MM/YYYY' where YYYY matches the year
+      const regex = `\\b${year}\\b`;
+      andConditions.push({
+        publicationDate: {
+          $regex: regex,
+        },
+      });
+    }
+  }
+
   if (Object.keys(filtersData).length) {
     andConditions.push({
       $and: Object.entries(filtersData).map(([field, value]) => ({
