@@ -6,8 +6,8 @@ import auth from '../../middleware/auth';
 const router = express.Router();
 
 router.post('/', validateRequest(bookValidation.createBookZodSchema), auth, bookController.createBook);
-router.get('/',auth, bookController.getAllBook);
-router.put('/', validateRequest(bookValidation.updateBookZodSchema), auth, bookController.updateBook);
-router.delete('/', auth, bookController.deleteBook);
-router.get('/:id',auth, bookController.getSingleBook);
+router.get('/', bookController.getAllBook);
+router.put('/:id', validateRequest(bookValidation.updateBookZodSchema), auth, bookController.updateBook);
+router.delete('/:id', auth, bookController.deleteBook);
+router.get('/:id', bookController.getSingleBook);
 export const BookRoutes = router;

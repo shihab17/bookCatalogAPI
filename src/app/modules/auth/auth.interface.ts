@@ -6,6 +6,7 @@ export type IUser = {
   password: string;
 };
 export type ILoginUserResponse = {
+  userId: Types.ObjectId;
   accessToken: string;
   refreshToken?: string;
 };

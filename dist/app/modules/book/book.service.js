@@ -29,7 +29,7 @@ const createBook = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, void 0, function* () {
-    const { searchTerm } = filters, filtersData = __rest(filters, ["searchTerm"]);
+    const { searchTerm, publicationYear } = filters, filtersData = __rest(filters, ["searchTerm", "publicationYear"]);
     const { page, limit, skip, sortBy, sortOrder } = paginationHelper_1.paginationHelpers.calculatePagination(paginationOptions);
     const andConditions = [];
     if (searchTerm) {
@@ -41,6 +41,19 @@ const getAllBook = (filters, paginationOptions) => __awaiter(void 0, void 0, voi
                 },
             })),
         });
+    }
+    if (publicationYear) {
+        // Extract the year from publicationYear (assumed format: 'YYYY')
+        const year = publicationYear.trim();
+        if (year.length === 4 && /^\d+$/.test(year)) {
+            // Construct a regular expression to match the publicationDate field in the format 'DD/MM/YYYY' where YYYY matches the year
+            const regex = `\\b${year}\\b`;
+            andConditions.push({
+                publicationDate: {
+                    $regex: regex,
+                },
+            });
+        }
     }
     if (Object.keys(filtersData).length) {
         andConditions.push({
